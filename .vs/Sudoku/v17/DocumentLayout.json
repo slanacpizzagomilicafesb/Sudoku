@@ -22,11 +22,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReadOnlyRichTextBox.cs",
+              "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\ReadOnlyRichTextBox.cs",
+              "RelativeDocumentMoniker": "Sudoku\\ReadOnlyRichTextBox.cs",
+              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\ReadOnlyRichTextBox.cs",
+              "RelativeToolTip": "Sudoku\\ReadOnlyRichTextBox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAwBIAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-17T13:40:53.704Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -42,26 +59,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ReadOnlyRichTextBox.cs",
-              "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\ReadOnlyRichTextBox.cs",
-              "RelativeDocumentMoniker": "Sudoku\\ReadOnlyRichTextBox.cs",
-              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\ReadOnlyRichTextBox.cs",
-              "RelativeToolTip": "Sudoku\\ReadOnlyRichTextBox.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T19:08:16.916Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs",
               "RelativeDocumentMoniker": "Sudoku\\Form1.cs",
               "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs",
               "RelativeToolTip": "Sudoku\\Form1.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAIwFgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAANgAAAAAAAAAAAAkwOIAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-15T15:12:59.447Z",
               "EditorCaption": ""

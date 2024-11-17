@@ -14,3 +14,4 @@ D:\Documents\projekti\Sudoku\Sudoku\obj\Debug\net8.0-windows\refint\Sudoku.dll
 D:\Documents\projekti\Sudoku\Sudoku\obj\Debug\net8.0-windows\Sudoku.pdb
 D:\Documents\projekti\Sudoku\Sudoku\obj\Debug\net8.0-windows\Sudoku.genruntimeconfig.cache
 D:\Documents\projekti\Sudoku\Sudoku\obj\Debug\net8.0-windows\ref\Sudoku.dll
+D:\Documents\projekti\Sudoku\Sudoku\obj\Debug\net8.0-windows\Sudoku.sourcelink.json
