@@ -981,6 +981,7 @@
             ClearButton.TabIndex = 102;
             ClearButton.Text = "Clear";
             ClearButton.UseVisualStyleBackColor = true;
+            ClearButton.Click += (this.ClearButton_Click);
             // 
             // r1c1
             // 

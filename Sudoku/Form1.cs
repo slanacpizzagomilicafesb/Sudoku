@@ -35,7 +35,7 @@ namespace Sudoku
         {
             List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
             foreach (Control Cell in NoteCells)
-                if (Cell is ReadOnlyRichTextBox && Cell.Name.Length == 5 && Cell.Name.Substring(0, 4).Contains(SelectedCell.Name))
+                if (Cell is ReadOnlyRichTextBox && Cell.Name.Substring(0, 4).Contains(SelectedCell.Name))
                     richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
             
             return richTextBoxList;
@@ -113,11 +113,11 @@ namespace Sudoku
                 Cell.BackColor = Color.White;
             foreach (var Cell in GetNotesCells(this))
                 Cell.BackColor = Color.White;
-            foreach (var Cell in GetCellsInLine(this, SelectedCell))
+            foreach (var Cell in GetCellsInLine(this, this.SelectedCell))
                 Cell.BackColor = Color.LightCyan;
-            foreach (var Cell in GetCellsInColumn(this, SelectedCell))
+            foreach (var Cell in GetCellsInColumn(this, this.SelectedCell))
                 Cell.BackColor = Color.LightCyan;
-            foreach (var Cell in GetCellsInBox(this, SelectedCell))
+            foreach (var Cell in GetCellsInBox(this, this.SelectedCell))
                 Cell.BackColor = Color.LightCyan;
             foreach (var Cell in GetNotesCellsSubset(GetNotesCells(this), this.SelectedCell))
                 Cell.BackColor = Color.LightSkyBlue;
@@ -150,7 +150,7 @@ namespace Sudoku
                     this.SelectedCell.Text = Button.Text;
 
                     //erase all the notes from the cells associated with this cell
-                    foreach(var NoteCell in GetNotesCellsSubset(GetNotesCells(this), SelectedCell))
+                    foreach(var NoteCell in GetNotesCellsSubset(GetNotesCells(this), this.SelectedCell))
                         NoteCell.Text = string.Empty;
 
                     //align text in centre of the textbox
@@ -264,7 +264,7 @@ namespace Sudoku
                 Cell.BackColor = Color.White;
             foreach (var Cell in GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))))
                 Cell.BackColor = Color.LightCyan;
-            foreach (var Cell in GetNotesCellsSubset(GetNotesCells(this), SelectedCell))
+            foreach (var Cell in GetNotesCellsSubset(GetNotesCells(this), this.SelectedCell))
                 Cell.BackColor = Color.LightSkyBlue;
             this.SelectedCell.BackColor = Color.LightSkyBlue;
         }
@@ -282,5 +282,11 @@ namespace Sudoku
                 NoteButton.FlatStyle = FlatStyle.Flat;
         }
 
+        private void ClearButton_Click(Object sender, EventArgs e)
+        {
+            this.SelectedCell.Text = string.Empty;
+            foreach(var Cell in GetNotesCellsSubset(GetNotesCells(this), this.SelectedCell))
+                Cell.Text = string.Empty;
+        }
     }
 }
