@@ -12343,7 +12343,6 @@
             this.Controls.Add(r7c72);
             this.Name = "Form1";
             this.Text = "Sudoku";
-            this.Load += (this.Form1_Load);
             this.ResumeLayout(false);
         }
 

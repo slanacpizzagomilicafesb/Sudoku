@@ -7,8 +7,20 @@
       "RelativeMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|solutionrelative:sudoku\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|d:\\documents\\projekti\\sudoku\\sudoku\\getfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|solutionrelative:sudoku\\getfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|d:\\documents\\projekti\\sudoku\\sudoku\\errorfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|solutionrelative:sudoku\\errorfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|D:\\Documents\\projekti\\Sudoku\\sudoku\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|solutionrelative:sudoku\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|d:\\documents\\projekti\\sudoku\\sudoku\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53DE9606-19C7-4A3D-99D9-19241210988D}|Sudoku\\Sudoku.csproj|solutionrelative:sudoku\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,15 +42,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "ErrorFunctions.cs",
+              "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\ErrorFunctions.cs",
+              "RelativeDocumentMoniker": "Sudoku\\ErrorFunctions.cs",
+              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\ErrorFunctions.cs",
+              "RelativeToolTip": "Sudoku\\ErrorFunctions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T18:56:46.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs",
               "RelativeDocumentMoniker": "Sudoku\\Form1.cs",
-              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs [Design]*",
-              "RelativeToolTip": "Sudoku\\Form1.cs [Design]*",
+              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs [Design]",
+              "RelativeToolTip": "Sudoku\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T21:56:16.512Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Sudoku\\Form1.Designer.cs",
+              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.Designer.cs",
+              "RelativeToolTip": "Sudoku\\Form1.Designer.cs",
+              "ViewState": "AgIAABkwAAAAAAAAAAAYwDgwAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T18:26:54.323Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -46,11 +84,24 @@
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs",
               "RelativeDocumentMoniker": "Sudoku\\Form1.cs",
-              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs*",
-              "RelativeToolTip": "Sudoku\\Form1.cs*",
-              "ViewState": "AgIAAPQAAAAAAAAAAAAmwP4AAABFAAAAAAAAAA==",
+              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\Form1.cs",
+              "RelativeToolTip": "Sudoku\\Form1.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAowGUAAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-15T15:12:59.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetFunctions.cs",
+              "DocumentMoniker": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\GetFunctions.cs",
+              "RelativeDocumentMoniker": "Sudoku\\GetFunctions.cs",
+              "ToolTip": "D:\\Documents\\projekti\\Sudoku\\Sudoku\\GetFunctions.cs",
+              "RelativeToolTip": "Sudoku\\GetFunctions.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAUwGgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T18:17:20.158Z",
               "EditorCaption": ""
             }
           ]

@@ -5,193 +5,25 @@ namespace Sudoku
 {
     public partial class Form1 : Form
     {
-        ReadOnlyRichTextBox SelectedCell;
-        ReadOnlyRichTextBox SelectedNoteCell;
-        List<ReadOnlyRichTextBox> AllCells = new List<ReadOnlyRichTextBox>();
-        List<ReadOnlyRichTextBox> AllNoteCells = new List<ReadOnlyRichTextBox>();
-        List<ReadOnlyRichTextBox> MistakeCells = new List<ReadOnlyRichTextBox>();
-        List<ReadOnlyRichTextBox> RemovedCells = new List<ReadOnlyRichTextBox>();
+        public ReadOnlyRichTextBox SelectedCell;
+        public ReadOnlyRichTextBox SelectedNoteCell;
+        public List<ReadOnlyRichTextBox> AllCells = new List<ReadOnlyRichTextBox>();
+        public List<ReadOnlyRichTextBox> AllNoteCells = new List<ReadOnlyRichTextBox>();
+        public List<ReadOnlyRichTextBox> MistakeCells = new List<ReadOnlyRichTextBox>();
+        public List<ReadOnlyRichTextBox> RemovedCells = new List<ReadOnlyRichTextBox>();
         bool Notes = false;
         bool BreakUsed = false;
-
-        //Function for getting all regular non-note cells
-        public static List<ReadOnlyRichTextBox> GetCells(Form form)
-        {
-            List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
-            foreach (Control Cell in form.Controls)
-                if (Cell is ReadOnlyRichTextBox && Cell.Name.Length == 4)
-                    richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
-            
-            return richTextBoxList;
-        }
-
-        //Function for getting all note cells
-        public static List<ReadOnlyRichTextBox> GetNotesCells(Form form)
-        {
-            List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
-            foreach (Control Cell in form.Controls)
-                if (Cell is ReadOnlyRichTextBox && Cell.Name.Length == 5)
-                    richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
-            
-            return richTextBoxList;
-        }
-
-        //Function for getting all notes cells associated with a single regular cell
-        public static List<ReadOnlyRichTextBox> GetNotesCellsSubset(List<ReadOnlyRichTextBox> NoteCells, ReadOnlyRichTextBox SelectedCell)
-        {
-            List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
-            foreach (Control Cell in NoteCells)
-                if (Cell is ReadOnlyRichTextBox && Cell.Name.Substring(0, 4).Contains(SelectedCell.Name))
-                    richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
-            
-            return richTextBoxList;
-        }
-
-        //Function for getting a regular cell from any note cell associated with it
-        public static ReadOnlyRichTextBox GetSpecificCell(List<ReadOnlyRichTextBox> Cells, ReadOnlyRichTextBox SelectedNoteCell)
-        {
-            ReadOnlyRichTextBox richTextBox = SelectedNoteCell;
-            foreach (Control Cell in Cells)
-                if (Cell is ReadOnlyRichTextBox && SelectedNoteCell.Name.Substring(0, 4).Contains(Cell.Name))
-                {
-                    richTextBox = (ReadOnlyRichTextBox)Cell;
-                    break;
-                }
-            
-            return richTextBox;
-        }
-
-        //Function for getting all cells in the line of the selected cell
-        public static List<ReadOnlyRichTextBox> GetCellsInLine(Form1 form, ReadOnlyRichTextBox SelectedCell)
-        {
-            List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
-            foreach(Control Cell in form.Controls)
-                if(Cell is ReadOnlyRichTextBox && string.Equals(SelectedCell.Name[1].ToString(), Cell.Name[1].ToString()))
-                    richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
-            
-            return richTextBoxList;
-        }
-
-        //Function for getting all cells in the column of the selected cell
-        public static List<ReadOnlyRichTextBox> GetCellsInColumn(Form1 form, ReadOnlyRichTextBox SelectedCell)
-        {
-            List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
-            foreach (Control Cell in form.Controls)
-                if (Cell is ReadOnlyRichTextBox && string.Equals(SelectedCell.Name[3].ToString(), Cell.Name[3].ToString()))
-                    richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
-            
-            return richTextBoxList;
-        }
-
-        //Function for getting all cells in the box of the selected cell
-        public static List<ReadOnlyRichTextBox> GetCellsInBox(Form1 form, ReadOnlyRichTextBox SelectedCell)
-        {
-            List<ReadOnlyRichTextBox> richTextBoxList = new List<ReadOnlyRichTextBox>();
-
-            int RowRatio = (int.Parse(SelectedCell.Name[1].ToString()) - 1) / 3;
-            int ColumnRatio = (int.Parse(SelectedCell.Name[3].ToString()) - 1) / 3;
-
-            foreach (Control Cell in form.Controls)
-                if (Cell is ReadOnlyRichTextBox && (int.Parse(Cell.Name[1].ToString()) - 1) / 3 == RowRatio && (int.Parse(Cell.Name[3].ToString()) - 1) / 3 == ColumnRatio)
-                    richTextBoxList.Add((ReadOnlyRichTextBox)Cell);
-
-            return richTextBoxList;
-        }
-
-        public static ReadOnlyRichTextBox GetBox(Form1 form, int BoxNum)
-        {
-            switch (BoxNum)
-            {
-                case 1:
-                    return form.r1c1;
-                case 2:
-                    return form.r1c4;
-                case 3:
-                    return form.r1c7;
-                case 4:
-                    return form.r4c1;
-                case 5:
-                    return form.r4c4;
-                case 6:
-                    return form.r4c7;
-                case 7:
-                    return form.r7c1;
-                case 8:
-                    return form.r7c4;
-                case 9:
-                    return form.r7c7;
-                default:
-                    break;
-            }
-            return form.r1c1;
-        }
-
-        public static ReadOnlyRichTextBox GetLine(Form1 form, int LineNum)
-        {
-            switch (LineNum)
-            {
-                case 1:
-                    return form.r1c1;
-                case 2:
-                    return form.r2c1;
-                case 3:
-                    return form.r3c1;
-                case 4:
-                    return form.r4c1;
-                case 5:
-                    return form.r5c1;
-                case 6:
-                    return form.r6c1;
-                case 7:
-                    return form.r7c1;
-                case 8:
-                    return form.r8c1;
-                case 9:
-                    return form.r9c1;
-                default:
-                    break;
-            }
-            return form.r1c1;
-        }
-
-        public static ReadOnlyRichTextBox GetColumn(Form1 form, int ColNum)
-        {
-            switch (ColNum)
-            {
-                case 1:
-                    return form.r1c1;
-                case 2:
-                    return form.r1c2;
-                case 3:
-                    return form.r1c3;
-                case 4:
-                    return form.r1c4;
-                case 5:
-                    return form.r1c5;
-                case 6:
-                    return form.r1c6;
-                case 7:
-                    return form.r1c7;
-                case 8:
-                    return form.r1c8;
-                case 9:
-                    return form.r1c9;
-                default:
-                    break;
-            }
-            return form.r1c1;
-        }
 
         public Form1()
         {
             InitializeComponent();
             Form1 f = this;
-            this.AllCells = GetCells(f);
-            this.AllNoteCells = GetNotesCells(f);
+            this.AllCells = GetFunctions.GetCells(f);
+            this.AllNoteCells = GetFunctions.GetNotesCells(f);
 
-            foreach (ReadOnlyRichTextBox Cell in AllCells)
+            foreach (ReadOnlyRichTextBox Cell in this.AllCells)
                 Cell.TabStop = false;
-            foreach (ReadOnlyRichTextBox NoteCell in AllNoteCells)
+            foreach (ReadOnlyRichTextBox NoteCell in this.AllNoteCells)
                 NoteCell.TabStop = false;
 
             //initial selected cell is set to the leftmost and topmost cell
@@ -203,16 +35,11 @@ namespace Sudoku
                 Cell.BackColor = Color.White;
             foreach (ReadOnlyRichTextBox Cell in this.AllNoteCells)
                 Cell.BackColor = Color.White;
-            foreach (ReadOnlyRichTextBox Cell in GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))))
+            foreach (ReadOnlyRichTextBox Cell in GetFunctions.GetCellsInBox(this, this.SelectedCell).Union(GetFunctions.GetCellsInLine(this, this.SelectedCell).Union(GetFunctions.GetCellsInColumn(this, this.SelectedCell))))
                 Cell.BackColor = Color.LightCyan;
-            foreach (ReadOnlyRichTextBox Cell in GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
+            foreach (ReadOnlyRichTextBox Cell in GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
                 Cell.BackColor = Color.LightSkyBlue;
             this.SelectedCell.BackColor = Color.LightSkyBlue;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void Button_Click(object sender, EventArgs e)
@@ -238,21 +65,14 @@ namespace Sudoku
 
                     for (int i = 1; i < 10; i++)
                     {
-                        foreach (var Cell1 in GetCellsInBox(this, GetBox(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell1 in GetFunctions.GetCellsInBox(this, GetFunctions.GetBox(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
-                            foreach (var Cell2 in GetCellsInBox(this, GetBox(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                            foreach (var Cell2 in GetFunctions.GetCellsInBox(this, GetFunctions.GetBox(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4 && C != Cell1))
                             {
-                                if (Cell1 != Cell2 && Cell1.Text == Cell2.Text)
+                                if (Cell1.Text == Cell2.Text)
                                 {
-                                    Cell1.ForeColor = Color.Red;
-                                    Cell1.BackColor = Color.MistyRose;
-                                    Cell2.ForeColor = Color.Red;
-                                    Cell2.BackColor = Color.MistyRose;
-
-                                    if (!this.MistakeCells.Contains(Cell1))
-                                        this.MistakeCells.Add(Cell1);
-                                    if (!this.MistakeCells.Contains(Cell2))
-                                        this.MistakeCells.Add(Cell2);
+                                    ErrorFunctions.ErrorColour(Cell1, Cell2);
+                                    ErrorFunctions.MistakeCellsAdd(this, this.MistakeCells, Cell1, Cell2);
                                 }
                             }
                         }
@@ -260,21 +80,14 @@ namespace Sudoku
 
                     for (int i = 1; i < 10; i++)
                     {
-                        foreach (var Cell1 in GetCellsInLine(this, GetLine(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell1 in GetFunctions.GetCellsInLine(this, GetFunctions.GetLine(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
-                            foreach (var Cell2 in GetCellsInLine(this, GetLine(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                            foreach (var Cell2 in GetFunctions.GetCellsInLine(this, GetFunctions.GetLine(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4 && C != Cell1))
                             {
-                                if (Cell1 != Cell2 && Cell1.Text == Cell2.Text)
+                                if (Cell1.Text == Cell2.Text)
                                 {
-                                    Cell1.ForeColor = Color.Red;
-                                    Cell1.BackColor = Color.MistyRose;
-                                    Cell2.ForeColor = Color.Red;
-                                    Cell2.BackColor = Color.MistyRose;
-
-                                    if (!this.MistakeCells.Contains(Cell1))
-                                        this.MistakeCells.Add(Cell1);
-                                    if (!this.MistakeCells.Contains(Cell2))
-                                        this.MistakeCells.Add(Cell2);
+                                    ErrorFunctions.ErrorColour(Cell1, Cell2);
+                                    ErrorFunctions.MistakeCellsAdd(this, this.MistakeCells, Cell1, Cell2);
                                 }
                             }
                         }
@@ -282,21 +95,14 @@ namespace Sudoku
 
                     for (int i = 1; i < 10; i++)
                     {
-                        foreach (var Cell1 in GetCellsInColumn(this, GetColumn(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell1 in GetFunctions.GetCellsInColumn(this, GetFunctions.GetColumn(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
-                            foreach (var Cell2 in GetCellsInColumn(this, GetColumn(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                            foreach (var Cell2 in GetFunctions.GetCellsInColumn(this, GetFunctions.GetColumn(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4 && C != Cell1))
                             {
-                                if (Cell1 != Cell2 && Cell1.Text == Cell2.Text)
+                                if (Cell1.Text == Cell2.Text)
                                 {
-                                    Cell1.ForeColor = Color.Red;
-                                    Cell1.BackColor = Color.MistyRose;
-                                    Cell2.ForeColor = Color.Red;
-                                    Cell2.BackColor = Color.MistyRose;
-
-                                    if (!this.MistakeCells.Contains(Cell1))
-                                        this.MistakeCells.Add(Cell1);
-                                    if (!this.MistakeCells.Contains(Cell2))
-                                        this.MistakeCells.Add(Cell2);
+                                    ErrorFunctions.ErrorColour(Cell1, Cell2);
+                                    ErrorFunctions.MistakeCellsAdd(this, this.MistakeCells, Cell1, Cell2);
                                 }
                             }
                         }
@@ -304,7 +110,7 @@ namespace Sudoku
 
                     foreach (var MistakeCell in this.MistakeCells)
                     {
-                        foreach (var Cell in GetCellsInBox(this, MistakeCell).Union(GetCellsInLine(this, MistakeCell).Union(GetCellsInColumn(this, MistakeCell))).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell in GetFunctions.GetCellsInBox(this, MistakeCell).Union(GetFunctions.GetCellsInLine(this, MistakeCell).Union(GetFunctions.GetCellsInColumn(this, MistakeCell))).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
                             if (MistakeCell != Cell && MistakeCell.Text != "" && MistakeCell.Text == Cell.Text)
                             {
@@ -323,7 +129,7 @@ namespace Sudoku
                         RemovedCell.ForeColor = Color.Black;
                         if (RemovedCell == this.SelectedCell)
                             RemovedCell.BackColor = Color.LightSkyBlue;
-                        else if (GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))).Where(C => C.Text != "" && C.Name.Length == 4).Contains(RemovedCell))
+                        else if (GetFunctions.GetCellsInBox(this, this.SelectedCell).Union(GetFunctions.GetCellsInLine(this, this.SelectedCell).Union(GetFunctions.GetCellsInColumn(this, this.SelectedCell))).Where(C => C.Text != "" && C.Name.Length == 4).Contains(RemovedCell))
                             RemovedCell.BackColor = Color.LightCyan;
                         else
                             RemovedCell.BackColor = Color.White;
@@ -343,7 +149,7 @@ namespace Sudoku
                     this.SelectedCell.Text = Button.Text;
 
                     //erase all the notes from the cells associated with this cell
-                    foreach(var NoteCell in GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
+                    foreach(var NoteCell in GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
                         NoteCell.Text = string.Empty;
 
                     //align text in centre of the textbox
@@ -361,21 +167,14 @@ namespace Sudoku
 
                     for (int i = 1; i < 10; i++)
                     {
-                        foreach (var Cell1 in GetCellsInBox(this, GetBox(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell1 in GetFunctions.GetCellsInBox(this, GetFunctions.GetBox(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
-                            foreach (var Cell2 in GetCellsInBox(this, GetBox(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                            foreach (var Cell2 in GetFunctions.GetCellsInBox(this, GetFunctions.GetBox(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4 && C != Cell1))
                             {
-                                if (Cell1 != Cell2 && Cell1.Text == Cell2.Text)
+                                if (Cell1.Text == Cell2.Text)
                                 {
-                                    Cell1.ForeColor = Color.Red;
-                                    Cell1.BackColor = Color.MistyRose;
-                                    Cell2.ForeColor = Color.Red;
-                                    Cell2.BackColor = Color.MistyRose;
-
-                                    if (!this.MistakeCells.Contains(Cell1))
-                                        this.MistakeCells.Add(Cell1);
-                                    if (!this.MistakeCells.Contains(Cell2))
-                                        this.MistakeCells.Add(Cell2);
+                                    ErrorFunctions.ErrorColour(Cell1, Cell2);
+                                    ErrorFunctions.MistakeCellsAdd(this, this.MistakeCells, Cell1, Cell2);
 
                                     if (Cell1 == this.SelectedCell || Cell2 == this.SelectedCell)
                                         this.SelectedCell.BackColor = Color.LightSalmon;
@@ -386,21 +185,14 @@ namespace Sudoku
 
                     for (int i = 1; i < 10; i++)
                     {
-                        foreach (var Cell1 in GetCellsInLine(this, GetLine(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell1 in GetFunctions.GetCellsInLine(this, GetFunctions.GetLine(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
-                            foreach (var Cell2 in GetCellsInLine(this, GetLine(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                            foreach (var Cell2 in GetFunctions.GetCellsInLine(this, GetFunctions.GetLine(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4 && C != Cell1))
                             {
-                                if (Cell1 != Cell2 && Cell1.Text == Cell2.Text)
+                                if (Cell1.Text == Cell2.Text)
                                 {
-                                    Cell1.ForeColor = Color.Red;
-                                    Cell1.BackColor = Color.MistyRose;
-                                    Cell2.ForeColor = Color.Red;
-                                    Cell2.BackColor = Color.MistyRose;
-
-                                    if (!this.MistakeCells.Contains(Cell1))
-                                        this.MistakeCells.Add(Cell1);
-                                    if (!this.MistakeCells.Contains(Cell2))
-                                        this.MistakeCells.Add(Cell2);
+                                    ErrorFunctions.ErrorColour(Cell1, Cell2);
+                                    ErrorFunctions.MistakeCellsAdd(this, this.MistakeCells, Cell1, Cell2);
 
                                     if (Cell1 == this.SelectedCell || Cell2 == this.SelectedCell)
                                         this.SelectedCell.BackColor = Color.LightSalmon;
@@ -411,21 +203,14 @@ namespace Sudoku
 
                     for (int i = 1; i < 10; i++)
                     {
-                        foreach (var Cell1 in GetCellsInColumn(this, GetColumn(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell1 in GetFunctions.GetCellsInColumn(this, GetFunctions.GetColumn(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
-                            foreach (var Cell2 in GetCellsInColumn(this, GetColumn(this, i)).Where(C => C.Text != "" && C.Name.Length == 4))
+                            foreach (var Cell2 in GetFunctions.GetCellsInColumn(this, GetFunctions.GetColumn(this.AllCells, i)).Where(C => C.Text != "" && C.Name.Length == 4 && C != Cell1))
                             {
-                                if (Cell1 != Cell2 && Cell1.Text == Cell2.Text)
+                                if (Cell1.Text == Cell2.Text)
                                 {
-                                    Cell1.ForeColor = Color.Red;
-                                    Cell1.BackColor = Color.MistyRose;
-                                    Cell2.ForeColor = Color.Red;
-                                    Cell2.BackColor = Color.MistyRose;
-
-                                    if (!this.MistakeCells.Contains(Cell1))
-                                        this.MistakeCells.Add(Cell1);
-                                    if (!this.MistakeCells.Contains(Cell2))
-                                        this.MistakeCells.Add(Cell2);
+                                    ErrorFunctions.ErrorColour(Cell1, Cell2);
+                                    ErrorFunctions.MistakeCellsAdd(this, this.MistakeCells, Cell1, Cell2);
 
                                     if (Cell1 == this.SelectedCell ||  Cell2 == this.SelectedCell)
                                         this.SelectedCell.BackColor = Color.LightSalmon;
@@ -436,7 +221,7 @@ namespace Sudoku
 
                     foreach (var MistakeCell in this.MistakeCells)
                     {
-                        foreach (var Cell in GetCellsInBox(this, MistakeCell).Union(GetCellsInLine(this, MistakeCell).Union(GetCellsInColumn(this, MistakeCell))).Where(C => C.Text != "" && C.Name.Length == 4))
+                        foreach (var Cell in GetFunctions.GetCellsInBox(this, MistakeCell).Union(GetFunctions.GetCellsInLine(this, MistakeCell).Union(GetFunctions.GetCellsInColumn(this, MistakeCell))).Where(C => C.Text != "" && C.Name.Length == 4))
                         {
                             if (MistakeCell != Cell && MistakeCell.Text != "" && MistakeCell.Text == Cell.Text)
                             {
@@ -455,7 +240,7 @@ namespace Sudoku
                         RemovedCell.ForeColor = Color.Black;
                         if (RemovedCell == this.SelectedCell)
                             RemovedCell.BackColor = Color.LightSkyBlue;
-                        else if (GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))).Where(C => C.Text != "" && C.Name.Length == 4).Contains(RemovedCell))
+                        else if (GetFunctions.GetCellsInBox(this, this.SelectedCell).Union(GetFunctions.GetCellsInLine(this, this.SelectedCell).Union(GetFunctions.GetCellsInColumn(this, this.SelectedCell))).Where(C => C.Text != "" && C.Name.Length == 4).Contains(RemovedCell))
                             RemovedCell.BackColor = Color.LightCyan;
                         else
                             RemovedCell.BackColor= Color.White;
@@ -468,7 +253,7 @@ namespace Sudoku
                     //************************************
 
                     //iterates through note non-empty cells that the selected cell sees
-                    foreach (var Cell in GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))).Where(C => C.Text != "" && C.Name.Length == 5))
+                    foreach (var Cell in GetFunctions.GetCellsInBox(this, this.SelectedCell).Union(GetFunctions.GetCellsInLine(this, this.SelectedCell).Union(GetFunctions.GetCellsInColumn(this, this.SelectedCell))).Where(C => C.Text != "" && C.Name.Length == 5))
                     {
                         //checks if the entered number is the same as the numbers in the note cells
                         //if it is, it deletes the associated note as that cell can no longer contain that number (in theory)
@@ -484,7 +269,7 @@ namespace Sudoku
             else
             {
                 //iterates through the note cells associated with the selected cell
-                foreach (var NoteCell in GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
+                foreach (var NoteCell in GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
                 {
                     NoteCell.BringToFront();
 
@@ -514,16 +299,16 @@ namespace Sudoku
         {
             //setting the SelectedCell and SelectedNoteCell to the clicked cell
             this.SelectedCell = (ReadOnlyRichTextBox)sender;
-            this.SelectedNoteCell = GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell)[0];
+            this.SelectedNoteCell = GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell)[0];
 
             //colouring the cells that the selected cell sees for ease of use
             foreach (var Cell in this.AllCells)
                 Cell.BackColor = Color.White;
             foreach (var Cell in this.AllNoteCells)
                 Cell.BackColor = Color.White;
-            foreach (var Cell in GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))))
+            foreach (var Cell in GetFunctions.GetCellsInBox(this, this.SelectedCell).Union(GetFunctions.GetCellsInLine(this, this.SelectedCell).Union(GetFunctions.GetCellsInColumn(this, this.SelectedCell))))
                 Cell.BackColor = Color.LightCyan;
-            foreach (var Cell in GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
+            foreach (var Cell in GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
                 Cell.BackColor = Color.LightSkyBlue;
 
             //colouring all the cells with the same number as the selected cell for ease of use
@@ -545,16 +330,16 @@ namespace Sudoku
         {
             //setting the SelectedCell and SelectedNoteCell to the clicked cell
             this.SelectedNoteCell = (ReadOnlyRichTextBox)sender;
-            this.SelectedCell = GetSpecificCell(this.AllCells, SelectedNoteCell);
+            this.SelectedCell = GetFunctions.GetSpecificCell(this.AllCells, SelectedNoteCell);
 
             //colouring the cells that the selected cell sees for ease of use
             foreach (var Cell in this.AllCells)
                 Cell.BackColor = Color.White;
             foreach (var Cell in this.AllNoteCells)
                 Cell.BackColor = Color.White;
-            foreach (var Cell in GetCellsInBox(this, this.SelectedCell).Union(GetCellsInLine(this, this.SelectedCell).Union(GetCellsInColumn(this, this.SelectedCell))))
+            foreach (var Cell in GetFunctions.GetCellsInBox(this, this.SelectedCell).Union(GetFunctions.GetCellsInLine(this, this.SelectedCell).Union(GetFunctions.GetCellsInColumn(this, this.SelectedCell))))
                 Cell.BackColor = Color.LightCyan;
-            foreach (var Cell in GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
+            foreach (var Cell in GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
                 Cell.BackColor = Color.LightSkyBlue;
 
             //colouring mistake cells
@@ -580,7 +365,7 @@ namespace Sudoku
         private void ClearButton_Click(Object sender, EventArgs e)
         {
             this.SelectedCell.Text = string.Empty;
-            foreach(var Cell in GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
+            foreach(var Cell in GetFunctions.GetNotesCellsSubset(this.AllNoteCells, this.SelectedCell))
                 Cell.Text = string.Empty;
         }
     }
